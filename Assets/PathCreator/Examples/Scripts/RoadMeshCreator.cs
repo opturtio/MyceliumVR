@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using PathCreation.Utility;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace PathCreation.Examples {
     public class RoadMeshCreator : PathSceneTool {
@@ -26,6 +27,8 @@ namespace PathCreation.Examples {
                 AssignMeshComponents ();
                 AssignMaterials ();
                 CreateRoadMesh ();
+                AddMeshCollider();
+                AddTeleportationArea();
             }
         }
 
@@ -114,7 +117,7 @@ namespace PathCreation.Examples {
             mesh.SetTriangles (roadTriangles, 0);
             mesh.SetTriangles (underRoadTriangles, 1);
             mesh.SetTriangles (sideOfRoadTriangles, 2);
-            mesh.RecalculateBounds ();
+            mesh.RecalculateBounds();
         }
 
         // Add MeshRenderer and MeshFilter components to this gameobject if not already attached
@@ -151,5 +154,35 @@ namespace PathCreation.Examples {
             }
         }
 
+        void AddMeshCollider()
+        {
+            // Add MeshCollider if not already present
+            MeshCollider collider = meshHolder.GetComponent<MeshCollider>();
+            if (collider == null)
+            {
+                collider = meshHolder.AddComponent<MeshCollider>();
+            }
+            collider.sharedMesh = mesh; // Assign the created mesh to the collider
+            collider.convex = false;
+        }
+
+        void AddTeleportationArea()
+        {
+            // Add TeleportationArea if not already present
+            TeleportationArea teleportationArea = meshHolder.GetComponent<TeleportationArea>();
+            if (teleportationArea == null)
+            {
+                teleportationArea = meshHolder.AddComponent<TeleportationArea>();
+            }
+            teleportationArea.teleportationProvider = FindObjectOfType<TeleportationProvider>();
+
+            // Clear all layers from the interaction layer mask
+            teleportationArea.interactionLayers = (InteractionLayerMask)0;
+
+            // Set the interaction layer mask to only include layer 31 (Teleportation)
+            int teleportationLayerIndex = 31; // User layer 31
+            InteractionLayerMask teleportationLayerMask = (InteractionLayerMask)(1 << teleportationLayerIndex);
+            teleportationArea.interactionLayers = teleportationLayerMask;
+        }
     }
 }
