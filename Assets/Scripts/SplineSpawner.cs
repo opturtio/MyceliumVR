@@ -18,6 +18,7 @@ namespace PathCreation.Examples
         public float branchChance= 0.05f;
 
         public List<Agent> agents;
+        public List<GameObject> branches;
 
         [Header("Materials")]
         public Material material;
@@ -66,7 +67,7 @@ namespace PathCreation.Examples
                 BezierPath bezierPath = new BezierPath(a.points, false, PathSpace.xyz);
 
                 branch.GetComponent<PathCreator>().bezierPath = bezierPath;
-                branch.GetComponent<PathCreator>().EditorData.vertexPathMaxAngleError = 0.5f;
+                branch.GetComponent<PathCreator>().EditorData.vertexPathMaxAngleError = 3f;
                 branch.GetComponent<PathCreator>().EditorData.vertexPathMinVertexSpacing = 1f;
 
                 branch.AddComponent<RoadMeshCreator>();
@@ -85,7 +86,13 @@ namespace PathCreation.Examples
 
 
                 branch.transform.parent = transform;
+                branches.Add(branch);
             }
+            foreach (GameObject b in branches)
+            {
+                Destroy(b);
+            }
+            branches.Clear();
         }
     }
 
