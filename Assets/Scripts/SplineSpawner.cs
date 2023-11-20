@@ -20,6 +20,8 @@ namespace PathCreation.Examples
         public List<Agent> agents;
         public List<GameObject> branches;
 
+        public WaypointManager waypointManager;
+
         [Header("Materials")]
         public Material material;
 
@@ -34,11 +36,13 @@ namespace PathCreation.Examples
             for (int i = 0; i < initialBranches; i++) {
                 float angle = i * 360 / initialBranches;
                 agents.Add(new Agent(
+                        null,
+                        0,
                         new Vector3(0f, 0f, 0f),
                         Quaternion.Euler(0f, angle, 0f) * new Vector3(0f, 0f, 1f),
                         stepCount,
                         this
-                    ));
+                    )); ;
             }
             needsToUpdate = true; // Because new branches were added
 
@@ -93,24 +97,35 @@ namespace PathCreation.Examples
                 Destroy(b);
             }
             branches.Clear();
+            waypointManager.startWaypoints(agents);
         }
+
     }
 
     public class Agent
     {
         Vector3 pos;
         Vector3 dir;
+        int initialStepsLeft;
         int stepsLeft;
+
+        public int level;
+        public int parentConnectIndex;
+        public Agent parent;
 
         public List<Vector3> points;
 
         SplineSpawner splineSpawner;
 
-        public Agent(Vector3 pos_, Vector3 dir_, int stepsLeft_, SplineSpawner splineSpawner_)
+        public Agent(Agent parent_, int connectIndex_, Vector3 pos_, Vector3 dir_, int stepsLeft_, SplineSpawner splineSpawner_)
         {
+            parent = parent_;
+            parentConnectIndex = connectIndex_;
+            level = parent != null ? parent.level + 1 : 0;
             pos = pos_;
             dir = dir_;
             stepsLeft = stepsLeft_;
+            initialStepsLeft = stepsLeft;
             splineSpawner = splineSpawner_;
             points = new List<Vector3>
             {
@@ -137,6 +152,8 @@ namespace PathCreation.Examples
                         float branchPitch = Random.Range(-splineSpawner.maxBranchPitchAngle, splineSpawner.maxBranchPitchAngle);
                         float branchYaw = Random.Range(-splineSpawner.maxBranchYawAngle, splineSpawner.maxBranchYawAngle);
                         splineSpawner.agents.Add(new Agent(
+                            this,
+                            initialStepsLeft - stepsLeft,
                             pos,
                             Quaternion.Euler(branchPitch, branchYaw, 0f) * dir,
                             stepsLeft,
@@ -146,6 +163,16 @@ namespace PathCreation.Examples
                 }
                 return true;
             } else { return false; }
+        }
+
+        public List<Vector3> getPointsToRootFromIndex(int index)
+        {
+            List<Vector3> parentPoints = parent != null ? parent.getPointsToRootFromIndex(parentConnectIndex) : new List<Vector3>();
+            for (int i = 0; i < index; i++)
+            {
+                parentPoints.Add(points[i]);
+            }
+            return parentPoints;
         }
     }
 }
