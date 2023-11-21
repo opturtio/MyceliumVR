@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using PathCreation.Utility;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.XR.Interaction.Toolkit;
 
 namespace PathCreation.Examples {
@@ -16,6 +18,8 @@ namespace PathCreation.Examples {
         public Material undersideMaterial;
         public float textureTiling = 1;
 
+        public UnityEngine.Rendering.VolumeProfile BranchProfile;
+
         [SerializeField, HideInInspector]
         GameObject meshHolder;
 
@@ -29,6 +33,7 @@ namespace PathCreation.Examples {
                 CreateRoadMesh ();
                 AddMeshCollider();
                 AddTeleportationArea();
+                AddPostProcessing();
             }
         }
 
@@ -183,6 +188,20 @@ namespace PathCreation.Examples {
             int teleportationLayerIndex = 31; // User layer 31
             InteractionLayerMask teleportationLayerMask = (InteractionLayerMask)(1 << teleportationLayerIndex);
             teleportationArea.interactionLayers = teleportationLayerMask;
+        }
+
+        private void AddPostProcessing()
+        {
+            Volume volume = meshHolder.GetComponent<Volume>();
+            if (volume == null)
+            {
+                volume = meshHolder.AddComponent<Volume>();
+            }
+            volume.profile = BranchProfile;
+
+            volume.isGlobal = false;
+            volume.blendDistance = 20;
+            
         }
     }
 }
