@@ -48,18 +48,22 @@ public class WaypointManager : MonoBehaviour
             points1.Add(agent1.points[i]);
         }
 
+        Vector3[] points2 = { new Vector3(1000, 1000, 1000), new Vector3(1001, 1001, 1001) };
+
         waypointPath1 = new GameObject("Trail 1");
         waypointPath2 = new GameObject("Trail 2");
         waypointPath1.AddComponent<PathCreator>();
         waypointPath2.AddComponent<PathCreator>();
 
         GameObject trailFollower1 = Instantiate(waypointTrailPrefab, transform.position, Quaternion.identity);
-        GameObject trailFollower2 = Instantiate(waypointTrailPrefab, new Vector3(1000, 1000, 1000), Quaternion.identity);
+        GameObject trailFollower2 = Instantiate(waypointTrailPrefab, transform.position, Quaternion.identity);
         trailFollower1.AddComponent<PathFollower>();
         trailFollower2.AddComponent<PathFollower>();
 
-        BezierPath bezierPath = new BezierPath(points1, false, PathSpace.xyz);
-        waypointPath1.GetComponent<PathCreator>().bezierPath = bezierPath;
+        BezierPath bezierPath1 = new BezierPath(points1, false, PathSpace.xyz);
+        waypointPath1.GetComponent<PathCreator>().bezierPath = bezierPath1;
+        BezierPath bezierPath2 = new BezierPath(points2, false, PathSpace.xyz);
+        waypointPath2.GetComponent<PathCreator>().bezierPath = bezierPath2;
 
         trailFollower1.GetComponent<PathFollower>().pathCreator = waypointPath1.GetComponent<PathCreator>();
         trailFollower2.GetComponent<PathFollower>().pathCreator = waypointPath2.GetComponent<PathCreator>();

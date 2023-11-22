@@ -27,6 +27,8 @@ namespace PathCreation.Examples
         [Header("Materials")]
         public Material material;
 
+        public UnityEngine.Rendering.VolumeProfile volume;
+
 
         private bool needsToUpdate = false;
 
@@ -81,6 +83,10 @@ namespace PathCreation.Examples
 
                 branch.AddComponent<RoadMeshCreator>();
                 RoadMeshCreator road = branch.GetComponent<RoadMeshCreator>();
+
+                // add bloom
+                road.BranchProfile = volume;
+
                 road.autoUpdate = true;
                 road.roadWidth = 0.5f;
                 road.thickness = 1f;
