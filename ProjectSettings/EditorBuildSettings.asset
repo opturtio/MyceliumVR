@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/lauri-test-scene.unity
+    guid: 21f97913331de6d4c973bdadf99d2b23
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 7ab6e991fcadd224290d9f0607f4e49f, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 263bb8333ec415542b0711aea01d52c2, type: 2}
