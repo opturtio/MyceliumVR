@@ -22,9 +22,13 @@ public class WaypointManager : MonoBehaviour
 
     private GameObject waypointPath1;
     private GameObject waypointPath2;
+    private GameObject trailFollower1;
+    private GameObject trailFollower2;
 
     private GameObject waypoint1;
     private GameObject waypoint2;
+
+    public AudioClip[] audioTracks;
 
     public void startWaypoints(List<Agent> agents_)
     {
@@ -40,6 +44,8 @@ public class WaypointManager : MonoBehaviour
         waypoint1 = Instantiate(waypointPrefab, targetPoint1 + new Vector3(0f, waypointHeight, 0f), Quaternion.identity);
         waypoint1.GetComponent<WaypointController>().type = 1;
         waypoint1.GetComponent<WaypointController>().manager = this;
+        waypoint1.GetComponent<AudioSource>().clip = RandomTracks().Item1;
+        waypoint1.GetComponent<AudioSource>().Play();
 
         waypoint1.transform.parent = transform;
 
@@ -55,8 +61,8 @@ public class WaypointManager : MonoBehaviour
         waypointPath1.AddComponent<PathCreator>();
         waypointPath2.AddComponent<PathCreator>();
 
-        GameObject trailFollower1 = Instantiate(waypointTrailPrefab, transform.position, Quaternion.identity);
-        GameObject trailFollower2 = Instantiate(waypointTrailPrefab, transform.position, Quaternion.identity);
+        trailFollower1 = Instantiate(waypointTrailPrefab, transform.position, Quaternion.identity);
+        trailFollower2 = Instantiate(waypointTrailPrefab, transform.position, Quaternion.identity);
         trailFollower1.AddComponent<PathFollower>();
         trailFollower2.AddComponent<PathFollower>();
 
@@ -102,6 +108,10 @@ public class WaypointManager : MonoBehaviour
 
         if (agent1Index > agent1.branches.Count)
         {
+            Destroy(waypointPath1);
+            Destroy(waypointPath2);
+            Destroy(trailFollower1);
+            Destroy(trailFollower2);
             Debug.Log("Reached end");
             return;
         }
@@ -134,16 +144,22 @@ public class WaypointManager : MonoBehaviour
             targetPoint2 = agent2.points[agent2.points.Count - 1];
         }
 
+        (AudioClip, AudioClip) clips = RandomTracks();
+        
 
         waypoint1 = Instantiate(waypointPrefab, targetPoint1 + new Vector3(0f, waypointHeight, 0f), Quaternion.identity);
         waypoint1.GetComponent<WaypointController>().type = 1;
         waypoint1.GetComponent<WaypointController>().manager = this;
+        waypoint1.GetComponent<AudioSource>().clip = clips.Item1;
+        waypoint1.GetComponent<AudioSource>().Play();
 
         waypoint1.transform.parent = transform;
 
         waypoint2 = Instantiate(waypointPrefab, targetPoint2 + new Vector3(0f, waypointHeight, 0f), Quaternion.identity);
         waypoint2.GetComponent<WaypointController>().type = 2;
         waypoint2.GetComponent<WaypointController>().manager = this;
+        waypoint2.GetComponent<AudioSource>().clip = clips.Item2;
+        waypoint2.GetComponent<AudioSource>().Play();
 
         waypoint2.transform.parent = transform;
 
@@ -168,6 +184,24 @@ public class WaypointManager : MonoBehaviour
         BezierPath bezierPath2 = new BezierPath(points2, false, PathSpace.xyz);
         waypointPath2.GetComponent<PathCreator>().bezierPath = bezierPath2;
 
+    }
+
+    private (AudioClip track1, AudioClip track2) RandomTracks()
+    {
+        int index1 = Random.Range(0, audioTracks.Length - 1);
+        int index2 = index1;
+
+        if (audioTracks.Length < 2)
+        {
+            return (null, null);
+        }
+
+        while(index2 == index1)
+        {
+            index2 = Random.Range(0, audioTracks.Length - 1);
+        }
+
+        return (audioTracks[index1], audioTracks[index2]);
     }
 
     // Start is called before the first frame update

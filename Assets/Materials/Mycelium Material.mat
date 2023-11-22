@@ -147,9 +147,9 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _CameraLocation: {r: -4.711461, g: 0.038219333, b: -0.7036553, a: 0}
+    - _CameraLocation: {r: -0.0054287533, g: 0.36170512, b: -0.022201205, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _VisionRange: {r: 0, g: 100, b: 0, a: 0}
+    - _VisionRange: {r: 0, g: 1000, b: 0, a: 0}
   m_BuildTextureStacks: []
