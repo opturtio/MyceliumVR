@@ -15,6 +15,7 @@ namespace PathCreation.Examples
         public float maxTurnYawAngle = 20f;
         public float maxBranchPitchAngle= 20f;
         public float maxBranchYawAngle = 20f;
+        public float minBranchYawAngle = 15f;
         public float branchChance= 0.05f;
         public int stepsBetweenBranches = 2;
 
@@ -26,9 +27,6 @@ namespace PathCreation.Examples
 
         [Header("Materials")]
         public Material material;
-
-        public UnityEngine.Rendering.VolumeProfile volume;
-
 
         private bool needsToUpdate = false;
 
@@ -83,9 +81,6 @@ namespace PathCreation.Examples
 
                 branch.AddComponent<RoadMeshCreator>();
                 RoadMeshCreator road = branch.GetComponent<RoadMeshCreator>();
-
-                // add bloom
-                road.BranchProfile = volume;
 
                 road.autoUpdate = true;
                 road.roadWidth = 0.5f;
@@ -165,7 +160,8 @@ namespace PathCreation.Examples
                     if (Random.Range(0f, 1f) < splineSpawner.branchChance)
                     {
                         float branchPitch = Random.Range(-splineSpawner.maxBranchPitchAngle, splineSpawner.maxBranchPitchAngle);
-                        float branchYaw = Random.Range(-splineSpawner.maxBranchYawAngle, splineSpawner.maxBranchYawAngle);
+                        float branchYaw = Random.Range(splineSpawner.minBranchYawAngle, splineSpawner.maxBranchYawAngle);
+                        branchYaw = Random.Range(0f,1f) > 0.5f ? branchYaw : -branchYaw;
                         Agent newAgent = new Agent(
                             this,
                             initialStepsLeft - stepsLeft,
@@ -177,7 +173,7 @@ namespace PathCreation.Examples
                         splineSpawner.agents.Add(newAgent);
                         branches.Add((initialStepsLeft - stepsLeft, newAgent));
 
-                        stepsUntilBranch = initialStepsUntilBranch + 1;
+                        stepsUntilBranch = initialStepsUntilBranch;
                     }
                 }
                 return true;
