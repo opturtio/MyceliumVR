@@ -6,7 +6,8 @@ using UnityEngine;
 public class MoveShaderScript : MonoBehaviour
 {
 
-    public Material material;
+    public Material myceliumMaterial;
+    public Material pathMaterial;
     public GameObject camera;
 
     // Start is called before the first frame update
@@ -18,6 +19,8 @@ public class MoveShaderScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        material.SetVector("_CameraLocation", camera.transform.position);
+        myceliumMaterial.SetVector("_CameraLocation", camera.transform.position);
+        pathMaterial.SetVector("_CameraLocation", camera.transform.position);
+
     }
 }

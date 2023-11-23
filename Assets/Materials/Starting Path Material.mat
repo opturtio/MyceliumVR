@@ -33,7 +33,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mycelium Material
+  m_Name: Starting Path Material
   m_Shader: {fileID: -6465566751694194690, guid: 68e0f54f03efd094e835bc71e4890277, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -134,7 +134,7 @@ Material:
     - _Pulse_Brightness: 0.01
     - _Pulse_Size: 0.05
     - _Pulse_Spacing: 0
-    - _Pulse_Speed: -2
+    - _Pulse_Speed: 2
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -158,5 +158,5 @@ Material:
     - _Pulse_Color: {r: 0.7882353, g: 0.99215686, b: 0.8117647, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _Vector4: {r: 0, g: 0, b: 0, a: 0}
-    - _VisionRange: {r: 0, g: 0, b: 0, a: 0}
+    - _VisionRange: {r: 0, g: 100, b: 0, a: 0}
   m_BuildTextureStacks: []

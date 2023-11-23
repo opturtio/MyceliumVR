@@ -103,7 +103,7 @@ namespace PathCreation.Examples
                 Destroy(b);
             }
             branches.Clear();
-            waypointManager.startWaypoints(startingAgents);
+            waypointManager.InitalizeAgents(startingAgents);
         }
 
     }

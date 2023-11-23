@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class WaypointManager : MonoBehaviour
 {
-    public int waypointTargetCount;
     public float waypointHeight;
     public GameObject waypointPrefab;
     public GameObject waypointTrailPrefab;
@@ -30,9 +29,23 @@ public class WaypointManager : MonoBehaviour
 
     public AudioClip[] audioTracks;
 
-    public void startWaypoints(List<Agent> agents_)
+    public Material myceliumMaterial;
+    public Material pathMaterial;
+
+    private bool gameStarted = false;
+    private float fadeProgress = 0f;
+
+    public GameObject startPath;
+
+    public void InitalizeAgents(List<Agent> agents_)
     {
         agents = agents_;
+    }
+
+
+    public void StartWaypoints()
+    {
+        gameStarted = true;
 
         agent1 = agents[Random.Range(0, agents.Count)];
         startingPoint = agent1.points[0];
@@ -81,11 +94,6 @@ public class WaypointManager : MonoBehaviour
         trailFollower1.transform.parent = transform;
         trailFollower2.transform.parent = transform;
 
-    }
-
-    private void Trigger()
-    {
-        Trigger(1);
     }
 
     public void Trigger(int type)
@@ -198,7 +206,7 @@ public class WaypointManager : MonoBehaviour
 
         while(index2 == index1)
         {
-            index2 = Random.Range(0, audioTracks.Length - 1);
+            index2 = Random.Range(0, audioTracks.Length);
         }
 
         return (audioTracks[index1], audioTracks[index2]);
@@ -207,14 +215,40 @@ public class WaypointManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        myceliumMaterial.SetVector("_VisionRange", new Vector2(0f, 0));
+        pathMaterial.SetVector("_VisionRange", new Vector2(0f, 100f));
     }
 
-    
+    private void OnDestroy()
+    {
+        myceliumMaterial.SetVector("_VisionRange", new Vector2(0f, 0));
+        pathMaterial.SetVector("_VisionRange", new Vector2(0f, 100f));
+    }
+
+
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameStarted)
+        {
+            if (fadeProgress < 1.0f)
+            {
+                myceliumMaterial.SetVector("_VisionRange", new Vector2(0f, fadeProgress * 100f));
+                pathMaterial.SetVector("_VisionRange", new Vector2(0f, 100f - fadeProgress * 100f));
+                fadeProgress += 0.001f;
+                if(fadeProgress > 1f)
+                {
+                    //Fade completed, destroy path
+                    int childs = startPath.transform.childCount;
+
+                    for (int i = childs - 1; i > 0; i--)
+                    {
+                        GameObject.Destroy(startPath.transform.GetChild(i).gameObject);
+                    }
+                    Destroy(startPath);
+                }
+            }
+        }
     }
 }
