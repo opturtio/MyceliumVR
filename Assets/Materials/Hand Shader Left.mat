@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hand Shader
+  m_Name: Hand Shader Left
   m_Shader: {fileID: -6465566751694194690, guid: 6d4a165a21d8caa4fb2b57b47b3a9fb0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Hand_Texture:
-        m_Texture: {fileID: 2800000, guid: 749b0b7db43d1bd43877c1920df5a386, type: 3}
+        m_Texture: {fileID: 2800000, guid: 94a28b649825a0e44aa42877221d04fd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:

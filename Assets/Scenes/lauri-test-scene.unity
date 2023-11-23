@@ -1313,8 +1313,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f927fc4e1f1a64fa788e982d6e9d23b1, type: 3}
   - {fileID: 8300000, guid: efdc5db9ae23442589a174c5716ee8b0, type: 3}
   - {fileID: 8300000, guid: decaa98c059e6409a86e2ff61ecc73a4, type: 3}
+  colors:
+  - {r: 0.9056604, g: 0.9056604, b: 0.49127805, a: 0}
+  - {r: 0.76400465, g: 0.8679245, b: 0.42168033, a: 0}
+  - {r: 0.8867924, g: 0.55412585, b: 0.33882165, a: 0}
+  - {r: 0.8773585, g: 0.43454075, b: 0.5047585, a: 0}
+  - {r: 0.45349768, g: 0.745283, b: 0.57196355, a: 0}
+  - {r: 0.4359743, g: 0.34376115, b: 0.7075472, a: 0}
   myceliumMaterial: {fileID: 2100000, guid: 557aafc944c4c754c85cf9244500bf51, type: 2}
   pathMaterial: {fileID: 2100000, guid: 70abf00f201cacd499cdf231602914b7, type: 2}
+  textBox: {fileID: 742217041}
   startPath: {fileID: 1907782677}
 --- !u!850595691 &448483498
 LightingSettings:

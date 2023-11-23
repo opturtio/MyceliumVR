@@ -28,9 +28,11 @@ public class WaypointManager : MonoBehaviour
     private GameObject waypoint2;
 
     public AudioClip[] audioTracks;
+    public Color[] colors;
 
     public Material myceliumMaterial;
     public Material pathMaterial;
+    public GameObject textBox;
 
     private bool gameStarted = false;
     private float fadeProgress = 0f;
@@ -57,7 +59,7 @@ public class WaypointManager : MonoBehaviour
         waypoint1 = Instantiate(waypointPrefab, targetPoint1 + new Vector3(0f, waypointHeight, 0f), Quaternion.identity);
         waypoint1.GetComponent<WaypointController>().type = 1;
         waypoint1.GetComponent<WaypointController>().manager = this;
-        waypoint1.GetComponent<AudioSource>().clip = RandomTracks().Item1;
+        waypoint1.GetComponent<AudioSource>().clip = audioTracks[RandomTrackIndices().Item1];
         waypoint1.GetComponent<AudioSource>().Play();
 
         waypoint1.transform.parent = transform;
@@ -152,22 +154,26 @@ public class WaypointManager : MonoBehaviour
             targetPoint2 = agent2.points[agent2.points.Count - 1];
         }
 
-        (AudioClip, AudioClip) clips = RandomTracks();
+        (int, int) clipIndicies = RandomTrackIndices();
         
 
         waypoint1 = Instantiate(waypointPrefab, targetPoint1 + new Vector3(0f, waypointHeight, 0f), Quaternion.identity);
         waypoint1.GetComponent<WaypointController>().type = 1;
         waypoint1.GetComponent<WaypointController>().manager = this;
-        waypoint1.GetComponent<AudioSource>().clip = clips.Item1;
+        waypoint1.GetComponent<AudioSource>().clip = audioTracks[clipIndicies.Item1];
         waypoint1.GetComponent<AudioSource>().Play();
+
+        waypoint1.GetComponent<WaypointController>().SetColor(colors[clipIndicies.Item1]);
 
         waypoint1.transform.parent = transform;
 
         waypoint2 = Instantiate(waypointPrefab, targetPoint2 + new Vector3(0f, waypointHeight, 0f), Quaternion.identity);
         waypoint2.GetComponent<WaypointController>().type = 2;
         waypoint2.GetComponent<WaypointController>().manager = this;
-        waypoint2.GetComponent<AudioSource>().clip = clips.Item2;
+        waypoint2.GetComponent<AudioSource>().clip = audioTracks[clipIndicies.Item2];
         waypoint2.GetComponent<AudioSource>().Play();
+
+        waypoint2.GetComponent<WaypointController>().SetColor(colors[clipIndicies.Item2]);
 
         waypoint2.transform.parent = transform;
 
@@ -194,14 +200,14 @@ public class WaypointManager : MonoBehaviour
 
     }
 
-    private (AudioClip track1, AudioClip track2) RandomTracks()
+    private (int, int) RandomTrackIndices()
     {
         int index1 = Random.Range(0, audioTracks.Length - 1);
         int index2 = index1;
 
         if (audioTracks.Length < 2)
         {
-            return (null, null);
+            return (-1, -1);
         }
 
         while(index2 == index1)
@@ -209,7 +215,7 @@ public class WaypointManager : MonoBehaviour
             index2 = Random.Range(0, audioTracks.Length);
         }
 
-        return (audioTracks[index1], audioTracks[index2]);
+        return (index1, index2);
     }
 
     // Start is called before the first frame update
@@ -217,6 +223,7 @@ public class WaypointManager : MonoBehaviour
     {
         myceliumMaterial.SetVector("_VisionRange", new Vector2(0f, 0));
         pathMaterial.SetVector("_VisionRange", new Vector2(0f, 100f));
+        textBox.SetActive(false);
     }
 
     private void OnDestroy()
@@ -234,6 +241,7 @@ public class WaypointManager : MonoBehaviour
         {
             if (fadeProgress < 1.0f)
             {
+                textBox.SetActive(true);
                 myceliumMaterial.SetVector("_VisionRange", new Vector2(0f, fadeProgress * 100f));
                 pathMaterial.SetVector("_VisionRange", new Vector2(0f, 100f - fadeProgress * 100f));
                 fadeProgress += 0.001f;
