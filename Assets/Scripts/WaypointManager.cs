@@ -123,6 +123,7 @@ public class WaypointManager : MonoBehaviour
             Destroy(trailFollower1);
             Destroy(trailFollower2);
             Debug.Log("Reached end");
+            TeleportToFinalPlatform();
             return;
         }
 
@@ -216,6 +217,18 @@ public class WaypointManager : MonoBehaviour
         }
 
         return (index1, index2);
+    }
+
+    void TeleportToFinalPlatform()
+    {
+        GameObject player = GameObject.Find("XR Interaction Setup");
+        if (player != null)
+        {
+            player.transform.position = new Vector3(200,205,90);
+        } else {
+            Debug.Log("Player not found!");
+        }
+
     }
 
     // Start is called before the first frame update
