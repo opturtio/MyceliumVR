@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 959501028815224190, guid: 0f8d7d3a5d4cac54bb9e0666b1d271cd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59ace86a51ec7ee47a1a74bac1df3ff9, type: 2}
     - target: {fileID: 1599841998406610212, guid: 0f8d7d3a5d4cac54bb9e0666b1d271cd, type: 3}
       propertyPath: m_Name
       value: Left Hand
