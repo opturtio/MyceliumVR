@@ -50,8 +50,12 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Pulse_Brightness: 0.05
+    - _Pulse_Spacing: 0.05
     m_Colors:
-    - _CameraLocation: {r: 278.7084, g: 181.52672, b: 0.35568917, a: 0}
+    - _Base_Color: {r: 0.8207547, g: 0.8011392, b: 0.7471965, a: 0}
+    - _CameraLocation: {r: 5, g: 28.482, b: -102.452, a: 0}
+    - _Pulse_Color: {r: 0.9150943, g: 0.8839191, b: 0.8158152, a: 0}
     - _VisionRange: {r: 0, g: 100, b: 0, a: 0}
   m_BuildTextureStacks: []
