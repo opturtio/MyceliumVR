@@ -1492,7 +1492,7 @@ MonoBehaviour:
   - {r: 0.4359743, g: 0.34376115, b: 0.7075472, a: 0}
   myceliumMaterial: {fileID: 2100000, guid: 557aafc944c4c754c85cf9244500bf51, type: 2}
   pathMaterial: {fileID: 2100000, guid: 70abf00f201cacd499cdf231602914b7, type: 2}
-  endPlatformMaterial: {fileID: 0}
+  endPlatformMaterial: {fileID: 2100000, guid: b2219f50ad7a43b468a18aed0bf4a930, type: 2}
   textBox: {fileID: 151238035}
   startPath: {fileID: 1907782677}
 --- !u!850595691 &448483498
@@ -1787,6 +1787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myceliumMaterial: {fileID: 2100000, guid: 557aafc944c4c754c85cf9244500bf51, type: 2}
   pathMaterial: {fileID: 2100000, guid: 70abf00f201cacd499cdf231602914b7, type: 2}
+  endPlatformMaterial: {fileID: 2100000, guid: b2219f50ad7a43b468a18aed0bf4a930, type: 2}
   camera: {fileID: 623740483}
 --- !u!20 &623740494 stripped
 Camera:

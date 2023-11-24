@@ -8,6 +8,7 @@ public class MoveShaderScript : MonoBehaviour
 
     public Material myceliumMaterial;
     public Material pathMaterial;
+    public Material endPlatformMaterial;
     public GameObject camera;
 
     // Start is called before the first frame update
@@ -21,6 +22,6 @@ public class MoveShaderScript : MonoBehaviour
     {
         myceliumMaterial.SetVector("_CameraLocation", camera.transform.position);
         pathMaterial.SetVector("_CameraLocation", camera.transform.position);
-
+        endPlatformMaterial.SetVector("_CameraLocation", camera.transform.position);
     }
 }

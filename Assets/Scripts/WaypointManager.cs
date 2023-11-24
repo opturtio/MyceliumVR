@@ -126,6 +126,7 @@ public class WaypointManager : MonoBehaviour
             Destroy(trailFollower2);
             Debug.Log("Reached end");
             TeleportToFinalPlatform();
+            gameEnded = true;
             return;
         }
 
@@ -223,7 +224,7 @@ public class WaypointManager : MonoBehaviour
 
     void TeleportToFinalPlatform()
     {
-        GameObject player = GameObject.Find("XR Interaction Setup");
+        GameObject player = GameObject.Find("XR Origin (XR Rig)");
         if (player != null)
         {
             player.transform.position = new Vector3(200,205,90);

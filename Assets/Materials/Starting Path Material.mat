@@ -51,5 +51,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats: []
-    m_Colors: []
+    m_Colors:
+    - _CameraLocation: {r: 199.98976, g: 206.36136, b: 89.99004, a: 0}
+    - _VisionRange: {r: 0, g: 100, b: 0, a: 0}
   m_BuildTextureStacks: []
