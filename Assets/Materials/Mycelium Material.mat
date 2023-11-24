@@ -152,7 +152,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Base_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _CameraLocation: {r: 4.84, g: 29.84144, b: -102.96, a: 0}
+    - _CameraLocation: {r: 280.07144, g: 181.91623, b: 59.91558, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Pulse_Color: {r: 0.7882353, g: 0.99215686, b: 0.8117647, a: 0}
