@@ -191,6 +191,7 @@ public class WaypointManager : MonoBehaviour
         waypoint1.GetComponent<AudioSource>().Play();
 
         waypoint1.GetComponent<WaypointController>().SetColor(colors[clipIndicies.Item1]);
+        trailFollower1.GetComponent<TrailController>().SetParticleColor(colors[clipIndicies.Item1]);
 
         waypoint1.transform.parent = transform;
 
@@ -201,6 +202,7 @@ public class WaypointManager : MonoBehaviour
         waypoint2.GetComponent<AudioSource>().Play();
 
         waypoint2.GetComponent<WaypointController>().SetColor(colors[clipIndicies.Item2]);
+        trailFollower2.GetComponent<TrailController>().SetParticleColor(colors[clipIndicies.Item2]);
 
         waypoint2.transform.parent = transform;
 
