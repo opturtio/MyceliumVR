@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.101600796, g: 0.101600796, b: 0.101600796, a: 1}
+  m_IndirectSpecularColor: {r: 0.10159732, g: 0.10159732, b: 0.10159732, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1492,6 +1492,7 @@ MonoBehaviour:
   - {r: 0.4359743, g: 0.34376115, b: 0.7075472, a: 0}
   myceliumMaterial: {fileID: 2100000, guid: 557aafc944c4c754c85cf9244500bf51, type: 2}
   pathMaterial: {fileID: 2100000, guid: 70abf00f201cacd499cdf231602914b7, type: 2}
+  endPlatformMaterial: {fileID: 0}
   textBox: {fileID: 151238035}
   startPath: {fileID: 1907782677}
 --- !u!850595691 &448483498
@@ -2415,7 +2416,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 70abf00f201cacd499cdf231602914b7, type: 2}
+  - {fileID: 2100000, guid: b2219f50ad7a43b468a18aed0bf4a930, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2428,7 +2429,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89

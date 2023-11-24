@@ -32,8 +32,10 @@ public class WaypointManager : MonoBehaviour
 
     public Material myceliumMaterial;
     public Material pathMaterial;
+    public Material endPlatformMaterial;
     public GameObject textBox;
 
+    private bool gameEnded = false;
     private bool gameStarted = false;
     private float fadeProgress = 0f;
 
@@ -234,6 +236,7 @@ public class WaypointManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        endPlatformMaterial.SetVector("_VisionRange", new Vector2(0f, 0f));
         myceliumMaterial.SetVector("_VisionRange", new Vector2(0f, 0));
         pathMaterial.SetVector("_VisionRange", new Vector2(0f, 100f));
         textBox.SetActive(false);
@@ -250,14 +253,20 @@ public class WaypointManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameStarted)
+        if (gameEnded)
+        {
+            myceliumMaterial.SetVector("_VisionRange", new Vector2(0f, 1000f));
+            pathMaterial.SetVector("_VisionRange", new Vector2(0f, 0f));
+            endPlatformMaterial.SetVector("_VisionRange", new Vector2(0f, 100f));
+            textBox.SetActive(false);
+        } else if (gameStarted)
         {
             if (fadeProgress < 1.0f)
             {
                 textBox.SetActive(true);
                 myceliumMaterial.SetVector("_VisionRange", new Vector2(0f, fadeProgress * 100f));
                 pathMaterial.SetVector("_VisionRange", new Vector2(0f, 100f - fadeProgress * 100f));
-                fadeProgress += 0.001f;
+                fadeProgress += 0.005f;
                 if(fadeProgress > 1f)
                 {
                     //Fade completed, destroy path
