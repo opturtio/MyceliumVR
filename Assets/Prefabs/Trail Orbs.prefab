@@ -41,7 +41,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7223062284036608672}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: ea9aac5a0ff75984bb298991c066d71d, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: e80c37704273a2b4cb61c8f333b96394, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -51,7 +51,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.5
+      - m_Value: 0.7
         m_Name: Size
         m_Overridden: 1
       - m_Value: 1
@@ -60,7 +60,7 @@ VisualEffect:
       - m_Value: 1000
         m_Name: SpawnRate
         m_Overridden: 1
-      - m_Value: 10
+      - m_Value: 40
         m_Name: TrailSpawnRate
         m_Overridden: 1
     m_Vector2f:
