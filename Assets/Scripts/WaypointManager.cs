@@ -250,7 +250,7 @@ public class WaypointManager : MonoBehaviour
         GameObject player = GameObject.Find("XR Origin (XR Rig)");
         if (player != null)
         {
-            player.transform.position = new Vector3(200,205,90);
+            player.transform.position = new Vector3(280,181,60);
         } else {
             Debug.Log("Player not found!");
         }
