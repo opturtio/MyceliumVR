@@ -58,7 +58,7 @@ public class WaypointManager : MonoBehaviour
 
         finalPath = new List<Vector3>();
 
-        agent1 = agents[Random.Range(0, agents.Count)];
+        agent1 = agents[0];
         startingPoint = agent1.points[0];
 
         agent1Index = 0;
