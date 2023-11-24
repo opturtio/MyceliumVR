@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.10128549, g: 0.101363994, b: 0.10128549, a: 1}
+  m_IndirectSpecularColor: {r: 0.10161747, g: 0.10161747, b: 0.10161747, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1499,6 +1499,7 @@ MonoBehaviour:
   pathMaterial: {fileID: 2100000, guid: 70abf00f201cacd499cdf231602914b7, type: 2}
   endPlatformMaterial: {fileID: 2100000, guid: b2219f50ad7a43b468a18aed0bf4a930, type: 2}
   textBox: {fileID: 151238035}
+  finalPathMaterial: {fileID: 2100000, guid: 3dee53989ea1b45328b0c637beaecde9, type: 2}
   startPath: {fileID: 1907782677}
 --- !u!850595691 &448483498
 LightingSettings:

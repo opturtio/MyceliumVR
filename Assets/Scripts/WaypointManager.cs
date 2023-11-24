@@ -34,10 +34,15 @@ public class WaypointManager : MonoBehaviour
     public Material pathMaterial;
     public Material endPlatformMaterial;
     public GameObject textBox;
+    public Material finalPathMaterial;
 
     private bool gameEnded = false;
     private bool gameStarted = false;
     private float fadeProgress = 0f;
+
+    private List<Vector3> finalPath;
+    private List<Vector3> points1;
+    private List<Vector3> points2;
 
     public GameObject startPath;
 
@@ -50,6 +55,8 @@ public class WaypointManager : MonoBehaviour
     public void StartWaypoints()
     {
         gameStarted = true;
+
+        finalPath = new List<Vector3>();
 
         agent1 = agents[Random.Range(0, agents.Count)];
         startingPoint = agent1.points[0];
@@ -66,12 +73,15 @@ public class WaypointManager : MonoBehaviour
 
         waypoint1.transform.parent = transform;
 
-        List<Vector3> points1 = new List<Vector3> ();
+        points1 = new List<Vector3> ();
+        points2 = new List<Vector3>();
         for (int i = 0; i <= agent1.branches[0].Item1; i++) {
             points1.Add(agent1.points[i]);
         }
+        finalPath.Add(points1[0]);
 
-        Vector3[] points2 = { new Vector3(1000, 1000, 1000), new Vector3(1001, 1001, 1001) };
+        points2.Add(new Vector3(1000, 1000, 1000));
+        points2.Add(new Vector3(1001, 1001, 1001));
 
         waypointPath1 = new GameObject("Trail 1");
         waypointPath2 = new GameObject("Trail 2");
@@ -107,12 +117,24 @@ public class WaypointManager : MonoBehaviour
 
         if (type == 1) {
             // Agent1 stays the same
+            // Add the points of agent1 to the final path
+            for (int i = 1; i < points1.Count; i++)
+            {
+                finalPath.Add(points1[i]);
+            }
+
         }
+
         else if(type == 2)
         {
             // Agent1 needs to be updated
             agent1 = agent2;
             agent1Index = 0;
+            // Add the points of agent1 to the final path
+            for (int i = 1; i < points2.Count; i++)
+            {
+                finalPath.Add(points2[i]);
+            }
         }
 
         // Index goes up
@@ -126,6 +148,7 @@ public class WaypointManager : MonoBehaviour
             Destroy(trailFollower2);
             Debug.Log("Reached end");
             TeleportToFinalPlatform();
+            CreateFinalPath();
             gameEnded = true;
             return;
         }
@@ -182,14 +205,14 @@ public class WaypointManager : MonoBehaviour
         waypoint2.transform.parent = transform;
 
         // Move the trails
-        List<Vector3> points1 = new List<Vector3>();
+        points1 = new List<Vector3>();
         int endPoint1 = agent1Index < agent1.branches.Count ? agent1.branches[agent1Index].Item1 : agent1.points.Count - 1;
         for (int i = agent1.branches[agent1Index - 1].Item1; i <= endPoint1; i++)
         {
             points1.Add(agent1.points[i]);
         }
 
-        List<Vector3> points2 = new List<Vector3>();
+        points2 = new List<Vector3>();
         int endPoint2 = agent2.branches.Count > 0 ? agent2.branches[0].Item1 : agent2.points.Count - 1;
         for (int i = 0; i <= endPoint2; i++)
         {
@@ -281,5 +304,35 @@ public class WaypointManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void CreateFinalPath()
+    {
+        GameObject branch = new GameObject("Final Branch");
+        branch.AddComponent<PathCreator>();
+
+        BezierPath bezierPath = new BezierPath(finalPath, false, PathSpace.xyz);
+
+        branch.GetComponent<PathCreator>().bezierPath = bezierPath;
+        branch.GetComponent<PathCreator>().EditorData.vertexPathMaxAngleError = 3f;
+        branch.GetComponent<PathCreator>().EditorData.vertexPathMinVertexSpacing = 1f;
+
+        branch.AddComponent<RoadMeshCreator>();
+        RoadMeshCreator road = branch.GetComponent<RoadMeshCreator>();
+
+        road.autoUpdate = true;
+        road.roadWidth = 0.6f;
+        road.thickness = 1.2f;
+        road.flattenSurface = true;
+
+        road.roadMaterial = finalPathMaterial;
+        road.undersideMaterial = finalPathMaterial;
+
+        road.pathCreator = branch.GetComponent<PathCreator>();
+
+        road.TriggerUpdate();
+
+
+        branch.transform.parent = transform;
     }
 }
