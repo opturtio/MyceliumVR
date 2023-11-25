@@ -131,6 +131,9 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _PulseBrightness: 0.05
+    - _PulseSpacing: 0.05
+    - _PulseSpeed: -2
     - _Pulse_Brightness: 0.05
     - _Pulse_Size: 0.05
     - _Pulse_Spacing: 0.05
@@ -152,9 +155,10 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Base_Color: {r: 0.81960785, g: 0.8, b: 0.7490196, a: 0}
-    - _CameraLocation: {r: 5, g: 28.482, b: -102.452, a: 0}
+    - _CameraLocation: {r: 26.3, g: 0.60143995, b: 59.7, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _PulseColor: {r: 0.9137255, g: 0.8823529, b: 0.8156863, a: 1}
     - _Pulse_Color: {r: 0.9137255, g: 0.88235295, b: 0.8156863, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _Vector4: {r: 0, g: 0, b: 0, a: 0}

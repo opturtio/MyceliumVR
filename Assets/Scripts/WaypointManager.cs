@@ -149,6 +149,7 @@ public class WaypointManager : MonoBehaviour
             Destroy(trailFollower2);
             Debug.Log("Reached end");
             TeleportToFinalPlatform();
+            PulsateMycelium();
             CreateFinalPath();
             gameEnded = true;
             return;
@@ -275,6 +276,8 @@ public class WaypointManager : MonoBehaviour
     private void OnDestroy()
     {
         myceliumMaterial.SetVector("_VisionRange", new Vector2(0f, 0));
+        myceliumMaterial.SetColor("_PulseColor", new Color(0.9137255f, 0.8823529f, 0.8156863f));
+        myceliumMaterial.SetFloat("_PulseBrightness", 0.05f);
         pathMaterial.SetVector("_VisionRange", new Vector2(0f, 100f));
     }
 
@@ -340,5 +343,14 @@ public class WaypointManager : MonoBehaviour
 
 
         branch.transform.parent = transform;
+    }
+
+    private void PulsateMycelium()
+    {
+        myceliumMaterial.SetColor("_PulseColor", new Color(0f, 1f, 0f));
+        myceliumMaterial.SetFloat("_PulseBrightness", 0.3f);
+        myceliumMaterial.SetFloat("_PulseSpacing", 0.05f);
+        myceliumMaterial.SetFloat("_PulseSpeed", -2f);
+
     }
 }
