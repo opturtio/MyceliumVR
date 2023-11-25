@@ -19,6 +19,12 @@ public class TrailController : MonoBehaviour
 
     }
 
+    public void SetParticleMaterial(Material material)
+    {
+        ps.GetComponent<ParticleSystemRenderer>().material = material;
+        ps.GetComponent<ParticleSystemRenderer>().trailMaterial = material;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

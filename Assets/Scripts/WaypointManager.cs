@@ -29,6 +29,7 @@ public class WaypointManager : MonoBehaviour
 
     public AudioClip[] audioTracks;
     public Color[] colors;
+    public Material[] particleMaterials;
 
     public Material myceliumMaterial;
     public Material pathMaterial;
@@ -192,6 +193,8 @@ public class WaypointManager : MonoBehaviour
 
         waypoint1.GetComponent<WaypointController>().SetColor(colors[clipIndicies.Item1]);
         trailFollower1.GetComponent<TrailController>().SetParticleColor(colors[clipIndicies.Item1]);
+        trailFollower1.GetComponent<TrailController>().SetParticleMaterial(particleMaterials[clipIndicies.Item1]);
+
 
         waypoint1.transform.parent = transform;
 
@@ -203,6 +206,7 @@ public class WaypointManager : MonoBehaviour
 
         waypoint2.GetComponent<WaypointController>().SetColor(colors[clipIndicies.Item2]);
         trailFollower2.GetComponent<TrailController>().SetParticleColor(colors[clipIndicies.Item2]);
+        trailFollower2.GetComponent<TrailController>().SetParticleMaterial(particleMaterials[clipIndicies.Item2]);
 
         waypoint2.transform.parent = transform;
 
