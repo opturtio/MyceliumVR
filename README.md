@@ -1,13 +1,13 @@
 # Mycelium-vr
 Groupwork for the Aalto University course Designing and Creating Virtual Worlds
 
-![](./Doc/Images/demo-poster.jpg)
+![Demo Poster](./Doc/Images/demo-poster.jpg)
 
 ### Each experience generates a unique path.
-![](./Doc/Videos/Opening.mp4)
+<video src="./Doc/Videos/Opening.mp4" autoplay loop muted></video>
 
 ### Progressing through the experience.
-![](./Doc/Videos/Movement.mp4)
+<video src="./Doc/Videos/Movement.mp4" autoplay loop muted></video>
 
 ### At the journey's end, the traversed path becomes visible.
-![](./Doc/Videos/TheEnd.mp4)
+<video src="./Doc/Videos/TheEnd.mp4" autoplay loop muted></video>
